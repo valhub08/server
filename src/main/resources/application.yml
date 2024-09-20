@@ -1,0 +1,13 @@
+spring:
+  # DB ?? ?? ?? => localhost:3306
+  datasource:
+    url: jdbc:mysql://localhost:3306/testDB2?serverTimezone=Asia/Seoul
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  # JPA ??
+  jpa:
+    hibernate:
+      ddl-auto: create # application ? ?? ??? create, ???? none ?? ????
+    show-sql: true
