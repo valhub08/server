@@ -10,4 +10,5 @@ public class Server8Application {
         SpringApplication.run(Server8Application.class, args);
     }
 
+
 }
