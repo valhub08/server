@@ -3,11 +3,11 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/testDB2?serverTimezone=Asia/Seoul
     username: root
-    password: 1234
+    password: Amgfaa289!@
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   # JPA ??
   jpa:
     hibernate:
-      ddl-auto: create # application ? ?? ??? create, ???? none ?? ????
+      ddl-auto: none
     show-sql: true
