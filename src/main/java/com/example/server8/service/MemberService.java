@@ -1,50 +1,22 @@
 package com.example.server8.service;
 
-import com.example.server8.dto.JoinRequest;
-import com.example.server8.dto.LoginRequest;
-import com.example.server8.member.Member;
+import com.example.server8.dto.MemberDTO;
+import com.example.server8.entity.MemberEntity;
 import com.example.server8.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
-@Service
-@Transactional
-@RequiredArgsConstructor
+@Service //스프링이 관리해주는 객체 == 스프링 빈
+@RequiredArgsConstructor //controller와 같이. final 멤버변수 생성자 만드는 역할
 public class MemberService {
 
-    private final MemberRepository memberRepository;
+    private final MemberRepository memberRepository; // 먼저 jpa, mysql dependency 추가
 
-    public boolean checkLoginIdDuplicate(String loginId){
-        return memberRepository.existsByLoginId(loginId);
-    }
-
-
-    public void join(JoinRequest joinRequest) {
-        memberRepository.save(joinRequest.toEntity());
-    }
-
-    public Member login(LoginRequest loginRequest) {
-        Member findMember = memberRepository.findByLoginId(loginRequest.getLoginId());
-
-        if(findMember == null){
-            return null;
-        }
-
-        if (!findMember.getPassword().equals(loginRequest.getPassword())) {
-            return null;
-        }
-
-        return findMember;
-    }
-
-    public Member getLoginMemberById(Long memberId){
-        if(memberId == null) return null;
-
-        Optional<Member> findMember = memberRepository.findById(memberId);
-        return findMember.orElse(null);
+    public void save(MemberDTO memberDTO) {
+        // repsitory의 save 메서드 호출
+        MemberEntity memberEntity = MemberEntity.toMemberEntity(memberDTO);
+        memberRepository.save(memberEntity);
+        //Repository의 save메서드 호출 (조건. entity객체를 넘겨줘야 함)
 
     }
 }
